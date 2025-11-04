@@ -1,0 +1,26 @@
+<!-- Основна область чату -->
+<template x-if="accessToken && roomId">
+  <div class="messages-container flex flex-col flex-grow">
+    
+    <!-- Список повідомлень -->
+    <div class="messages flex-grow overflow-y-auto p-2 bg-white rounded shadow">
+      <template x-for="msg in messages" :key="msg.event_id">
+        <div class="p-2 mb-1 border-b border-gray-200">
+          <span class="font-semibold" x-text="msg.sender"></span>:
+          <span x-text="msg.content.body"></span>
+        </div>
+      </template>
+    </div>
+
+    <!-- Поле для нового повідомлення -->
+    <div class="mt-2">
+      <textarea x-model="newMessage" 
+                placeholder="Type a message..."
+                class="message-input border p-2 w-full rounded"></textarea>
+      <button @click="sendMessage()" 
+              class="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition mt-2">
+        Send
+      </button>
+    </div>
+  </div>
+</template>
